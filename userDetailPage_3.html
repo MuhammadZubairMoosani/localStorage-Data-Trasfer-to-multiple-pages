@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><label id="name"></label></td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td><label id="age"></label></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td><label id="gender"></label></td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td><label id="city"></label></td>
+        </tr>
+        <tr>
+            <td>ID</td>
+            <td><label id="id"></label></td>
+        </tr>
+    </table>
+    <button onclick="back()">Back</button>
+    <button onclick="edit()">Edit Record</button>
+    <button onclick="deleteRerd()">Delete Record</button>
+</body>
+<script>
+    var userList = JSON.parse(localStorage.getItem('user')) || {};
+    var id = window.location.hash.replace('#', '');
+    var userDetail;
+    for (let i = 0; i < userList.length; i++) {
+        if (userList[i].id == id) userDetail = i;
+    }
+    document.getElementById('name').innerHTML = userList[userDetail].name;
+    document.getElementById('age').innerHTML = userList[userDetail].age;
+    document.getElementById('gender').innerHTML = userList[userDetail].gender;
+    document.getElementById('city').innerHTML = userList[userDetail].city;
+    document.getElementById('id').innerHTML = userList[userDetail].id;
+
+    function back() {
+        window.location.href = './viewUserPage_2.html';
+    }
+
+    function edit() {
+        window.location.href = './editRecordPage_4.html#' + id;
+    }
+
+    function deleteRerd() {
+        userList.splice(userDetail, 1);
+        localStorage.setItem('user', JSON.stringify(userList));
+        window.location.href = './viewUserPage_2.html';
+    }
+</script>
+
+</html>

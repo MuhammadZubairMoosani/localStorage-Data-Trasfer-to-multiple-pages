@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <table id="table" border="1">
+        <tr>
+            <th colspan="6">Users List</th>
+        </tr>
+        <tr>
+            <th>S no.</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>City</th>
+            <th>View Detail</th>
+    </table>
+    <button onclick="back()">Back</button>
+    <button onclick="deleteRecord()">Delete All Record</button>
+</body>
+<script>
+    var userList = JSON.parse(localStorage.getItem('user')) || {};
+
+    for (let i = 0; i < userList.length; i++) {
+        document.getElementById('table').innerHTML +=
+        `<tr>
+          <td>` + i + `</td>
+          <td>` + userList[i].name + `</td>
+          <td>` + userList[i].age + `</td>
+          <td>` + userList[i].gender + `</td>
+          <td>` + userList[i].city + `</td>
+          <td><button onclick="moreDetail(${userList[i].id})">More Detail</button></td>
+        </tr>`
+    }
+
+    function moreDetail(id) {
+        window.location.href = './userDetailPage_3.html#' + id;
+    }
+
+    function back() {
+        window.location.href = './addRecordPage_1.html';
+    }
+
+    function deleteRecord() {
+        localStorage.removeItem('user');
+        location.reload();
+    }
+</script>
+
+</html>

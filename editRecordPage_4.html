@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Edit record</h2>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" id="name"></td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td><input type="text" id="age"></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td><input type="text" id="gender"></td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td><input type="text" id="city"></td>
+        </tr>
+        <tr>
+            <td>ID</td>
+            <td><input type="text" id="id"></td>
+        </tr>
+    </table>
+    <button onclick="back()">Back</button>
+    <button onclick="update()">Update Record</button>
+</body>
+<script>
+    var userList = JSON.parse(localStorage.getItem('user')) || {};
+    var id = window.location.hash.replace('#', '');
+    var user;
+    for (let i = 0; i < userList.length; i++) {
+        if (userList[i].id == id) user = i;
+    }
+    document.getElementById('name').value = userList[user].name;
+    document.getElementById('age').value = userList[user].age;
+    document.getElementById('gender').value = userList[user].gender;
+    document.getElementById('city').value = userList[user].city;
+    document.getElementById('id').value = userList[user].id;
+
+    function back() {
+        window.location.href = './userDetailPage_3.html#' + id;
+    }
+
+    function update() {
+        userList[user].name = document.getElementById('name').value;
+        userList[user].age = document.getElementById('age').value;
+        userList[user].gender = document.getElementById('gender').value;
+        userList[user].city = document.getElementById('city').value;
+        userList[user].id = document.getElementById('id').value;
+        localStorage.setItem('user', JSON.stringify(userList));
+        window.location.href = './userDetailPage_3.html#' + id;
+    }
+</script>
+
+</html>
