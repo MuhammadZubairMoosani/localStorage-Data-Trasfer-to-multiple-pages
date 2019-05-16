@@ -32,10 +32,6 @@
             <td>City</td>
             <td><input type="text" id="city"></td>
         </tr>
-        <tr>
-            <td>ID</td>
-            <td><input type="text" id="id"></td>
-        </tr>
     </table>
     <button onclick="back()">Back</button>
     <button onclick="update()">Update Record</button>
@@ -51,7 +47,6 @@
     document.getElementById('age').value = userList[user].age;
     document.getElementById('gender').value = userList[user].gender;
     document.getElementById('city').value = userList[user].city;
-    document.getElementById('id').value = userList[user].id;
 
     function back() {
         window.location.href = './userDetailPage_3.html#' + id;
@@ -62,7 +57,6 @@
         userList[user].age = document.getElementById('age').value;
         userList[user].gender = document.getElementById('gender').value;
         userList[user].city = document.getElementById('city').value;
-        userList[user].id = document.getElementById('id').value;
         localStorage.setItem('user', JSON.stringify(userList));
         window.location.href = './userDetailPage_3.html#' + id;
     }
